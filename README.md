@@ -43,7 +43,7 @@ browser ──127.0.0.1:8080──► miniflux ──"db":5432──► postgres
 ## Quick start
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/tamilore-dev/miniflux-lab
 cd miniflux-lab
 cp .env.example .env
 nano .env                # set real passwords
