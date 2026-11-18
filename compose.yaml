@@ -14,9 +14,11 @@ services:
       test: ["CMD", "pg_isready", "-U", "miniflux"]
       interval: 5s
       retries: 5
-
+    mem_limit: 512m
+    cpus: 0.5
+  
   miniflux:
-    image: miniflux/miniflux:latest   # replace latest with a version tag from Docker Hub
+    image: miniflux/miniflux:2.2.10
     restart: unless-stopped
     depends_on:
       db:
@@ -29,8 +31,12 @@ services:
       CREATE_ADMIN: 1
       ADMIN_USERNAME: admin
       ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      CLEANUP_ARCHIVE_READ_DAYS: 60
+      CLEANUP_ARCHIVE_UNREAD_DAYS: 180
+      CLEANUP_REMOVE_SESSIONS_DAYS: 30
     networks:
       - backend
+    mem_limit: 256m
 
 networks:
   backend:
